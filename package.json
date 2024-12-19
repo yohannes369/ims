@@ -1,0 +1,20 @@
+{
+  "name": "imsproject",
+  "version": "1.0.0",
+  "description": "ims simple project",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ims"
+  },
+  "author": "yohannes yeneakl",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "mysql2": "^3.11.5"
+  }
+}
