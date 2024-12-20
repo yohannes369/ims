@@ -2,11 +2,19 @@ import express from 'express';
 const app = express();
 const port = 5200;
 
-// Corrected the import statement to use ES6 syntax
 import userrouter from './routes/userroute.js';
-
-// Corrected the path in app.use
+import dbconn from './db/dbconfig.js';
+app.use(express.json());
 app.use('/api/user', userrouter);
+
+async function test() {
+    try {
+        const result = await dbconn.execute("select 'test' ");
+        console.log(result);
+    } catch (err) {
+        console.log(err.message);
+    }
+}
 
 app.listen(port, (err) => {
     if (err) {
@@ -15,3 +23,6 @@ app.listen(port, (err) => {
         console.log(`The server is listening on port ${port}`);
     }
 });
+
+// Call the test function to execute the query
+test();

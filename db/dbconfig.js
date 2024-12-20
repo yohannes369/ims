@@ -7,10 +7,4 @@ const dbconn = mysql2.createPool({
     password: '1234'
 });
 
-dbconn.execute("SELECT 'vv'", (err, data) => {
-    if (err) {
-        console.log(err.message);
-    } else {
-        console.log(data);
-    }
-});
+export default dbconn.promise();
