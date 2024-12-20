@@ -14,8 +14,10 @@
   "author": "yohannes yeneakl",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "dbconfig": "^1.1.7",
     "express": "^4.21.2",
-    "mysql2": "^3.11.5"
+    "mysql2": "^3.11.5",
+    "nodemon": "^3.1.9"
   }
 }
