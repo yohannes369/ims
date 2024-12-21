@@ -1,5 +1,8 @@
 import dbconn from '../db/dbconfig.js';
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
+import { json } from 'express';
 export const register = async (req, res) => {
     try {
         const { username, firstname, lastname, email, password } = req.body;
@@ -59,7 +62,13 @@ export const login = async(req, res) => {
 
             return res.json({ msg:"invalid crenintial"})
         }
-        return res.json({ user:user})
+        const username=user[0].username
+        const user_id=user[0].user_id
+        const token =jwt.sign({username,user_id},"john")
+           return  res.json({msg :"user is login",token})
+        
+         
+        // return res.json({ user:user})
 
     } catch (err) {
         res.status(500).json({ msg: 'something is wrong' });
@@ -68,5 +77,9 @@ export const login = async(req, res) => {
 
 
 export const check = async(req, res) => {
-    res.send('Welcome to the user check page!');
+   const username= req.user.username
+   const user_id =req.user.user_id
+
+        res.json({msg:"valied user",username,user_id})
+    // res.send('Welcome to the user check page!');
 };
