@@ -1,10 +1,16 @@
 import express from 'express';
+
 const app = express();
 const port = 5200;
+import cors from 'cors';
+app.use(cors());
 
 import userrouter from './routes/userroute.js';
 import dbconn from './db/dbconfig.js';
+
+
 app.use(express.json());
+
 app.use('/api/user', userrouter);
 
 async function test() {
@@ -26,4 +32,3 @@ app.listen(port, (err) => {
 
 // Call the test function to execute the query
 test();
-// yohanes yene

@@ -1,0 +1,60 @@
+/* Login.css */
+
+.login-form {
+    max-width: 400px; /* Set a maximum width for the form */
+    margin: 50px auto; /* Center the form horizontally with some top margin */
+    padding: 20px; /* Add padding inside the form */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    background-color: #ffffff; /* White background for contrast */
+}
+
+.login-form h2 {
+    text-align: center; /* Center the heading */
+    margin-bottom: 20px; /* Space below the heading */
+    color: #333; /* Darker text color for readability */
+}
+
+.login-form input {
+    width: 100%; /* Full width inputs */
+    padding: 10px; /* Padding inside inputs */
+    margin-bottom: 15px; /* Space between inputs */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px; /* Slightly rounded corners */
+    font-size: 16px; /* Font size for inputs */
+}
+
+.login-form input:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+.login-form button {
+    width: 100%; /* Full width button */
+    padding: 10px; /* Padding inside button */
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text color */
+    border: none; /* No border */
+    border-radius: 4px; /* Slightly rounded corners */
+    font-size: 16px; /* Font size for button text */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.login-form button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+.login-form p {
+    text-align: center; /* Center the paragraph text */
+}
+
+.login-form p button {
+    background-color: transparent; /* Transparent background for register button */
+    color: #007bff; /* Same color as primary button */
+    border: none; /* No border for register button */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.login-form p button:hover {
+    text-decoration: underline; /* Underline text on hover for emphasis */
+}
