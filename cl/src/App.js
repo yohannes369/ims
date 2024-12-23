@@ -1,17 +1,35 @@
-import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
-import Home from "./page/home";
+// import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// import { AuthProvider } from './routeprotect/AuthContext'; 
+// import ProtectedRoute from './routeprotect/ProtectedRoute';
 import Login from "./page/login";
+import Admin from "./page/admin";
 import Register from "./page/register";
-import axios from "axios"; // Ensure this is the correct import path
+import Add from "./page/add";
+// import axios from "./axiosconfig"; // Ensure this is the correct import path
 
 function App() {
+  // const Navigate = useNavigate();
+
+  // async function check() {
+  //   try {
+  //     await axios.get('/user/check');
+  //   } catch (error) {
+  //     console.log(error.response);
+  //     Navigate('/login');
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   check();
+  // }, []);
+
   return (
     <Router>
       <div>
-      
         <Routes>
-          <Route path="/" element={<Home />} />
+        <Route path="/add" element={<Add />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
@@ -19,23 +37,5 @@ function App() {
     </Router>
   );
 }
-
-// function CheckAuth() {
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     async function check() {
-//       try {
-//         await axios.get('/user/check');
-//       } catch (error) {
-//         console.log(error.response);
-//         navigate('/login');
-//       }
-//     }
-//     check();
-//   }, [navigate]);
-
-//   return null;
-// }
 
 export default App;

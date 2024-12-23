@@ -20,7 +20,8 @@ function Login() {
     }
 
     try {
-      const response = await axios.post('/user/login', {
+      // const response = 
+      await axios.post('/user/login', {
         email: emailValue,
         password: passwordValue
       });
@@ -29,7 +30,7 @@ function Login() {
       // localStorage.setItem('token', response.data.token); // Uncomment if using token
 
       alert('Login is successful.');
-      navigate('/'); // Redirect to home page after successful login
+      navigate('/admin'); // Redirect to home page after successful login
     } catch (error) {
       // Handle specific error responses
       if (error.response) {

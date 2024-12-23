@@ -8,7 +8,7 @@ app.use(cors());
 import userrouter from './routes/userroute.js';
 import dbconn from './db/dbconfig.js';
 
-
+app.use(express.static('public'));
 app.use(express.json());
 
 app.use('/api/user', userrouter);
