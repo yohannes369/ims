@@ -20,17 +20,24 @@ function Login() {
     }
 
     try {
-      // const response = 
-      await axios.post('/user/login', {
+      const response = await axios.post('/user/login', {
         email: emailValue,
         password: passwordValue
       });
 
       // Assuming the response contains a token or user data
-      // localStorage.setItem('token', response.data.token); // Uncomment if using token
-
+      localStorage.setItem('token', response.data.token); // Uncomment if using token
+      switch (response.data.ad) {
+        case 'Admin':
+          navigate('/admin');
+          break;
+        case 'Manager':
+          navigate('/manager');
+          break;
+        default:
+          navigate('/');
+      }
       alert('Login is successful.');
-      navigate('/admin'); // Redirect to home page after successful login
     } catch (error) {
       // Handle specific error responses
       if (error.response) {

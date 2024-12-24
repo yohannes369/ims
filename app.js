@@ -4,7 +4,10 @@ const app = express();
 const port = 5200;
 import cors from 'cors';
 app.use(cors());
-
+const Users = [
+    { email: 'admin@example.com', password: 'asdfghjkl', userType: 'Admin' },
+    { email: 'Manager@example.com', password: 'lkjhgfdsa', userType: 'Manager' }
+  ];
 import userrouter from './routes/userroute.js';
 import dbconn from './db/dbconfig.js';
 

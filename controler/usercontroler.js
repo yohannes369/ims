@@ -87,7 +87,23 @@ export const add = async (req, res) => {
         res.status(500).json({ msg: 'An error occurred during data insertion.' });
     }
 };
-
+// manger functionality
+export const manager = async (req, res) => {
+    const { firstname, lastname } = req.body;
+    if (!firstname || !lastname) {
+        return res.status(400).json({ msg: 'First name and last name are required in manager page ' });
+    }
+    try {
+        await dbconn.execute(
+            'INSERT INTO ad (firstname, lastname) VALUES (?, ?)',
+            [firstname, lastname]
+        );
+        res.status(200).json({ msg: 'Data inserted successfull maanager' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ msg: 'An error occurred during data insertion.' });
+    }
+};
 
 // User check function
 export const check = async (req, res) => {
