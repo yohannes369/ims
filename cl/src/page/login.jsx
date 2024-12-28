@@ -1,85 +1,69 @@
+
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../axiosconfig';
-import '../CSS/login.css';
+import '../CSS/register.css';
 
 function Login() {
-  const navigate = useNavigate();
-  const emailRef = useRef();
-  const passwordRef = useRef();
+const navigatate=  useNavigate();
+
+  const emailDom = useRef();
+  const passwordDom = useRef();
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const emailValue = emailRef.current.value;
-    const passwordValue = passwordRef.current.value;
+    const emailValue = emailDom.current.value;
+    const passwordValue = passwordDom.current.value;
 
-    if (!emailValue || !passwordValue) {
-      alert('Please fill in both fields.');
+    if (
+  
+     
+      !emailValue ||
+      !passwordValue
+    ) {
+      alert('Please fill in all required fields.');
       return;
     }
 
     try {
-      const response = await axios.post('/user/login', {
+     
+      await axios.post('/user/login', {
+      
         email: emailValue,
         password: passwordValue
       });
-
-      // Assuming the response contains a token or user data
-      localStorage.setItem('token', response.data.token); // Uncomment if using token
-      switch (response.data.ad) {
-        case 'Admin':
-          navigate('/admin');
-          break;
-        case 'Manager':
-          navigate('/manager');
-          break;
-        default:
-          navigate('/');
-      }
-      alert('Login is successful.');
+      alert('login is successful.');
+    navigatate('/register')
     } catch (error) {
-      // Handle specific error responses
-      if (error.response) {
-        const message = error.response.data.msg || 'An error occurred. Please try again later.';
-        alert(message);
-      } else {
-        alert('Network error. Please try again later.');
-      }
-      console.error(error);
+      alert('Something went wrong.');
+      console.log(error.response);
     }
   }
 
-  const handleRegisterRedirect = () => {
-    navigate('/register'); // Redirect to registration page
-  };
-
   return (
-    <div className="login-form">
-      <h2>Login</h2>
+    <div className="registration-form">
+      <h2>login</h2>
       <form onSubmit={handleSubmit}>
+       
+     
+      
         <input
           type="email"
           name="email"
           placeholder="Email"
-          ref={emailRef}
+          ref={emailDom}
           required
         />
         <input
           type="password"
           name="password"
           placeholder="Password"
-          ref={passwordRef}
+          ref={passwordDom}
           required
         />
-        <button type="submit">Login</button>
+        <button type="submit">login</button>
       </form>
-      <p>
-        Don't have an account? 
-        <button onClick={handleRegisterRedirect} style={{ marginLeft: '5px' }}>
-          Register here
-        </button>
-      </p>
     </div>
   );
 }

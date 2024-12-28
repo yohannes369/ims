@@ -12,9 +12,9 @@ export const register = async (req, res) => {
         }
 
         // Check if user already exists
-        const [existingUser] = await dbconn.query('SELECT username FROM users WHERE username = ? OR email = ?', [username, email]);
+        const [User] = await dbconn.query('SELECT username FROM users WHERE username = ? OR email = ?', [username, email]);
         
-        if (existingUser.length > 0) {
+        if (User.length > 0) {
             return res.status(400).json({ msg: "User already registered." });
         }
 
@@ -40,7 +40,7 @@ export const register = async (req, res) => {
     }
 };
 
-// Login function
+// Admin Login function
 export const login = async (req, res) => {
     const { email, password } = req.body;
 
@@ -49,7 +49,7 @@ export const login = async (req, res) => {
     }
 
     try {
-        const [user] = await dbconn.query('SELECT username, user_id, password FROM users WHERE email = ?', [email]);
+        const [user] = await dbconn.query('select username, user_id, password from users WHERE email = ?', [email]);
 
         if (user.length === 0) {
             return res.status(401).json({ msg: 'Invalid credentials.' });
@@ -60,54 +60,21 @@ export const login = async (req, res) => {
         if (!isMatch) {
             return res.status(401).json({ msg: "Invalid credentials." });
         }
-
-        const token = jwt.sign({ username: user[0].username, user_id: user[0].user_id }, "your_jwt_secret", { expiresIn: '1h' });
-
-        return res.json({ msg: "User logged in successfully.", token });
+                 const username=user[0].username
+                 const user_id =user[0].user_id;
+                 const token =jwt.sign({username,user_id},'john')
+                 return res.json({msg:'user is login',token})
         
+
     } catch (err) {
         console.error(err);
-        res.status(500).json({ msg: 'An error occurred during login.' });
-    }
-};
-// add user function
-export const add = async (req, res) => {
-    const { firstname, lastname } = req.body;
-    if (!firstname || !lastname) {
-        return res.status(400).json({ msg: 'First name and last name are required.' });
-    }
-    try {
-        await dbconn.execute(
-            'INSERT INTO ad (firstname, lastname) VALUES (?, ?)',
-            [firstname, lastname]
-        );
-        res.status(200).json({ msg: 'Data inserted successfully.' });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ msg: 'An error occurred during data insertion.' });
-    }
-};
-// manger functionality
-export const manager = async (req, res) => {
-    const { firstname, lastname } = req.body;
-    if (!firstname || !lastname) {
-        return res.status(400).json({ msg: 'First name and last name are required in manager page ' });
-    }
-    try {
-        await dbconn.execute(
-            'INSERT INTO ad (firstname, lastname) VALUES (?, ?)',
-            [firstname, lastname]
-        );
-        res.status(200).json({ msg: 'Data inserted successfull maanager' });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ msg: 'An error occurred during data insertion.' });
+        res.status(500).json({ msg: 'An error occurred during login.'});
     }
 };
 
 // User check function
 export const check = async (req, res) => {
-   const { username, user_id } = req.user; // Assuming req.user is populated by middleware
+    const { username, user_id } = req.user; // Assuming req.user is populated by middleware
 
-   res.json({ msg: "Valid user", username, user_id });
+    res.json({ msg: "Valid user", username, user_id });
 };
