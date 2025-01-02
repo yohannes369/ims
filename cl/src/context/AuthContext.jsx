@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (email, password) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+            const response = await axios.post('http://localhost:5200/api/auth/login', { email, password });
             setUser(response.data);
             return response;
         } catch (error) {

@@ -11,7 +11,7 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/register', { email, password, role });
+            const response = await axios.post('http://localhost:5200/api/auth/register', { email, password, role });
             
             // Check if response and response.data are defined
             if (response && response.data) {
