@@ -1,10 +1,13 @@
-// src/pages/Admin.js
 import React from 'react';
+import Logout from './logout'; // Ensure the correct import path
 
-const ManagerPage = () => {
-    return <h1>manager Dashboard</h1>;
+const Managerpage = () => {
+    return (
+        <div>
+            <h1>Managerpage Dashboard</h1>
+            <Logout /> {/* Add the Logout component */}
+        </div>
+    );
 };
 
-
-
-export default  ManagerPage;
+export default Managerpage;

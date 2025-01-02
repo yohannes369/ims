@@ -11,6 +11,8 @@ router.post('/register',register )
 
 // Login route
 router.post('/login',login ) 
+router.post('/logout',logout ) 
+
     // admin user
 // router.post('/add',add)
 //  manger route
