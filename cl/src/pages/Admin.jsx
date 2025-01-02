@@ -1,6 +1,6 @@
 import React from 'react';
 import Logout from './logout'; // Ensure the correct import path
-
+import '../CSS/admin.css'
 const AdminPage = () => {
     return (
         <div>

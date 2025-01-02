@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext'; 
 import { useNavigate } from 'react-router-dom';
+import '../CSS/login.css';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -40,6 +41,14 @@ const Login = () => {
 
     return (
         <div>
+            <div className='b'>
+        <img src="./bonga.png" alt="Login Image" className="login-image" />
+        </div>
+        <div className='a'>
+
+
+            <h1>LOGIN FORM</h1>
+        
             <form onSubmit={handleSubmit}>
                 <input 
                     type="email" 
@@ -58,7 +67,10 @@ const Login = () => {
                 <button type="submit">Login</button>
                 {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>} {/* Display error message */}
             </form>
+          
         </div>
+        </div>
+        
     );
 };
 
