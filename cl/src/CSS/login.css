@@ -1,9 +1,80 @@
 
-.a{
-    margin-bottom:60%;
+/* Global Styles */
 
-    width: 0%;
+
+body {
+
+    font-family: 'Open Sans', sans-serif;
+    background-color: yellowgreen;
+    margin: 0;
+    padding: 0;
 }
-.b{
-    
+
+/* Container Styles */
+.a {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
+
+/* Header Styles */
+.a h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input, button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2ecc71;
+}
+
+/* Error Message Styles */
+.a p {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Background Image */
+.b {
+
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .a {
+        padding: 10px;
+    }
+}
+

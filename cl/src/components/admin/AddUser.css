@@ -1,8 +1,8 @@
 /* admin.css */
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Open Sans', sans-serif; /* A more neutral font */
+    background-color: #f7f7f7; /* Lighter background */
     margin: 0;
     padding: 0;
 }
@@ -18,7 +18,7 @@ body {
 
 h1, h2 {
     text-align: center;
-    color: #333;
+    color: #444; /* Darker text color */
 }
 
 form {
@@ -33,13 +33,13 @@ input, select, button {
     max-width: 400px;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd; /* Lighter border */
     border-radius: 4px;
     font-size: 16px;
 }
 
 button {
-    background-color: #007bff;
+    background-color: #3498db; /* A more neutral blue */
     color: #fff;
     border: none;
     cursor: pointer;
@@ -47,7 +47,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #2ecc71; /* A softer green on hover */
 }
 
 table {
@@ -63,7 +63,7 @@ th, td {
 }
 
 th {
-    background-color: #007bff;
+    background-color: #3498db; /* Consistent with button color */
     color: #fff;
 }
 
@@ -72,27 +72,33 @@ td {
 }
 
 button.edit, button.delete {
-    padding: 5px 10px;
-    margin: 0 5px;
+    padding: 3px 6px; /* Reduced padding */
+    margin: 0 5px; /* Margin remains the same */
     border-radius: 4px;
+    font-size: 12px; /* Reduced font size */
 }
 
 button.edit {
-    background-color: #28a745;
+    background-color: #2ecc71; /* Green for edit */
     color: #fff;
 }
 
 button.edit:hover {
-    background-color: #218838;
+    background-color: #1abc9c; /* Softer green on hover */
 }
 
 button.delete {
-    background-color: #dc3545;
+    background-color: #e74c3c; /* Orange-red for delete */
     color: #fff;
 }
 
 button.delete:hover {
-    background-color: #c82333;
+    background-color: #c0392b; /* Darker orange-red on hover */
+}
+
+/* To place edit and delete buttons side by side */
+td button {
+    display: inline-block; /* Display buttons inline */
 }
 
 @media (max-width: 768px) {

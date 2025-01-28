@@ -3,7 +3,7 @@ import axios from 'axios';
 // import UserList from '../components/admin/user_list';
 import Register from '../components/admin/add_user';
 import '../CSS/admin.css';
-
+import Logout from '../components/admin/logout';
 const AdminPage = () => {
   const [users, setUsers] = useState([]);
 
@@ -25,7 +25,7 @@ const AdminPage = () => {
     <div className="admin-page">
       <h1>Admin User Management</h1>
       <Register addUser={addUser} />
-    
+    <Logout />
     </div>
   );
 };

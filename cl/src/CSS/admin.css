@@ -1,13 +1,17 @@
 /* src/CSS/AdminPage.css */
+
 .admin-dashboard {
   text-align: center;
   font-family: Arial, sans-serif;
+  width: 100%; /* Ensure full width */
+  margin: 0 auto; /* Center horizontally */
 }
 
 .admin-header {
   margin: 20px 0;
   position: relative;
   display: inline-block;
+  width: 100%; /* Make header full width */
 }
 
 .admin-options {
@@ -16,6 +20,7 @@
   background-color: #f9f9f9;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  width: 200px; /* Set a specific width for dropdown */
 }
 
 .admin-header:hover .admin-options {
@@ -30,8 +35,19 @@
   background-color: #f1f1f1;
   border: none;
   cursor: pointer;
+  width: 100%; /* Make buttons full width of dropdown */
 }
 
 .admin-option-button:hover {
   background-color: #ddd;
+}
+
+/* Optional: Add a container for full-width content */
+.admin-content {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
