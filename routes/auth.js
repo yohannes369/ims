@@ -1,4 +1,3 @@
-
 import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -6,76 +5,129 @@ import jwt from 'jsonwebtoken';
 const router = express.Router();
 
 const authRoutes = (db) => {
-    // Register route
-    router.post('/register', async (req, res) => {
-        const { email, password, role } = req.body;
+  // Register User
+  router.post('/register', async (req, res) => {
+    const { email, password, role } = req.body;
+    if (!email || !password || !role) {
+      return res.status(400).json({ msg: 'Please fill in all required fields.' });
+    }
 
-        // Validate input
-        if (!email || !password || !role) {
-            return res.status(400).json({ msg: 'Please fill in all required fields.' });
-        }
+    if (password.length < 8) {
+      return res.status(400).json({ msg: 'Password length must be at least eight characters.' });
+    }
 
-        try {
-            // Check if user already exists
-            const [existingUser] = await db.query('SELECT email FROM users WHERE email = ?', [email]);
-            if (existingUser.length > 0) {
-                return res.status(400).json({ msg: "User already registered." });
-            }
+    try {
+      const [existingUser] = await db.query('SELECT email FROM users WHERE email = ?', [email]);
+      if (existingUser.length > 0) {
+        return res.status(400).json({ msg: 'User already registered.' });
+      }
 
-            // Validate password length
-            if (password.length < 8) {
-                return res.status(400).json({ msg: "Password length must be at least eight characters." });
-            }
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
 
-            // Hash the password
-            const salt = await bcrypt.genSalt(10);
-            const hashedPassword = await bcrypt.hash(password, salt);
+      await db.query('INSERT INTO users (email, password, role) VALUES (?, ?, ?)', [email, hashedPassword, role]);
+      res.status(201).json({ msg: 'User created successfully.' });
+    } catch (err) {
+      console.error('Registration error:', err);
+      res.status(500).json({ msg: 'An error occurred during registration.' });
+    }
+  });
 
-            // Insert new user into the database
-            await db.query('INSERT INTO users (email, password, role) VALUES (?, ?, ?)', [email, hashedPassword, role]);
+  // Login User
+  router.post('/login', async (req, res) => {
+    const { email, password } = req.body;
 
-            res.status(201).json({ msg: "User created successfully." });
-        } catch (err) {
-            console.error('Registration error:', err);
-            res.status(500).json({ msg: 'An error occurred during registration.' });
-        }
-    });
+    try {
+      const [results] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
+      if (results.length === 0) {
+        return res.status(401).json({ msg: 'Invalid credentials.' });
+      }
 
-    // Login route
-    router.post('/login', async (req, res) => {
-        const { email, password } = req.body;
+      const user = results[0];
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (!isPasswordValid) {
+        return res.status(401).json({ msg: 'Invalid credentials.' });
+      }
 
-        try {
-            const [results] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
-            if (results.length === 0) {
-                console.error('No user found with this email:', email);
-                return res.status(401).json({ msg: "Invalid credentials" });
-            }
+      const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      res.json({ token, role: user.role });
+    } catch (err) {
+      console.error('Login error:', err);
+      res.status(500).json({ msg: 'An error occurred during login.' });
+    }
+  });
 
-            const user = results[0];
-            const isPasswordValid = await bcrypt.compare(password, user.password);
-            if (!isPasswordValid) {
-                console.error('Invalid password for user:', email);
-                return res.status(401).json({ msg: "Invalid credentials" });
-            }
+  // Logout User
+  router.post('/logout', (req, res) => {
+    res.json({ msg: 'User logged out successfully.' });
+  });
 
-            // Generate token including user ID and role
-            const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-            
-            // Return token and role in response
-            res.json({ token, role: user.role });
-        } catch (err) {
-            console.error('Error during login:', err);
-            res.status(500).json({ msg: 'An error occurred during login.' });
-        }
-    });
+  // Fetch All Users
+  router.get('/users', async (req, res) => {
+    try {
+      const [users] = await db.query('SELECT id, email,role FROM users');
+      res.status(200).json(users);
+    } catch (err) {
+      console.error('Error fetching users:', err);
+      res.status(500).json({ msg: 'An error occurred while fetching the users.' });
+    }
+  });
 
-    // Logout route 
-    router.post('/logout', (req, res) => { 
-        res.json({ msg: 'User logged out successfully.' }); 
-    });
+  // Update User
+  router.put('/users/:id', async (req, res) => {
+    const { id } = req.params;
+    const { email, password, role } = req.body;
 
-    return router;
+    if (!email || !role) {
+      return res.status(400).json({ msg: 'Please provide email and role.' });
+    }
+
+    try {
+      const [existingUser] = await db.query('SELECT * FROM users WHERE id = ?', [id]);
+      if (!existingUser.length) {
+        return res.status(404).json({ msg: 'User not found.' });
+      }
+
+      let query = 'UPDATE users SET email = ?, role = ?';
+      const params = [email, role];
+
+      if (password) {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        query += ', password = ?';
+        params.push(hashedPassword);
+      }
+
+      query += ' WHERE id = ?';
+      params.push(id);
+
+      await db.query(query, params);
+      res.status(200).json({ msg: 'User updated successfully.' });
+    } catch (err) {
+      console.error('Update error:', err);
+      res.status(500).json({ msg: 'An error occurred during user update.' });
+    }
+  });
+
+  // Delete User
+  router.delete('/users/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+      const [existingUser] = await db.query('SELECT * FROM users WHERE id = ?', [id]);
+      if (!existingUser.length) {
+        return res.status(404).json({ msg: 'User not found.' });
+      }
+
+      await db.query('DELETE FROM users WHERE id = ?', [id]);
+      res.status(200).json({ msg: 'User deleted successfully.' });
+    } catch (err) {
+      console.error('Delete error:', err);
+      res.status(500).json({ msg: 'An error occurred during user deletion.' });
+    }
+  });
+
+  return router;
 };
 
 export default authRoutes;

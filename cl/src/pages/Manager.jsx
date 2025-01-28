@@ -1,5 +1,5 @@
 import React from 'react';
-import Logout from './logout'; // Ensure the correct import path
+import Logout from '../components/admin/logout'; // Ensure the correct import path
 
 const Managerpage = () => {
     return (

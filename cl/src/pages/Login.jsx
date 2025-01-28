@@ -42,7 +42,7 @@ const Login = () => {
     return (
         <div>
             <div className='b'>
-        <img src="./bonga.png" alt="Login Image" className="login-image" />
+        {/* <img src="./bonga.png" alt="Login Image" className="login-image" /> */}
         </div>
         <div className='a'>
 

@@ -1,72 +1,37 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .admin-page {
-    text-align: center;
-  }
-  
-  .admin-page button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 20px;
-  }
-  
-  .admin-page button:hover {
-    background-color: #45a049;
-  }
-  
-  .registration-form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    margin: 20px auto;
-  }
-  
-  .registration-form h2 {
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .registration-form input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .registration-form button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .registration-form button:hover {
-    background-color: #45a049;
-  }
-  
-  .registration-form input:focus {
-    border-color: #4CAF50;
-    outline: none;
-  }
-  
+/* src/CSS/AdminPage.css */
+.admin-dashboard {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.admin-header {
+  margin: 20px 0;
+  position: relative;
+  display: inline-block;
+}
+
+.admin-options {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.admin-header:hover .admin-options {
+  display: block;
+}
+
+.admin-option-button {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  background-color: #f1f1f1;
+  border: none;
+  cursor: pointer;
+}
+
+.admin-option-button:hover {
+  background-color: #ddd;
+}

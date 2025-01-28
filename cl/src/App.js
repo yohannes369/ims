@@ -5,8 +5,10 @@ import Login from './pages/Login';
 import Admin from './pages/Admin'; 
 import Manager from './pages/Manager'; 
 import Home from './pages/Home'; 
-import ProtectedRoute from './components/ProtectedRoute'; 
+
+import ProtectedRoute from './routes/ProtectedRoute'; 
 import { AuthProvider } from './context/AuthContext'; 
+// import RegistrationForm from './admin/create_user'
 
 const App = () => {
     return (
@@ -14,7 +16,7 @@ const App = () => {
             <Router>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
+                                  <Route path="/login" element={<Login />} />
                     <Route 
                         path="/admin" 
                         element={
@@ -31,7 +33,17 @@ const App = () => {
                             </ProtectedRoute>
                         } 
                     />
+              
+                {/* <Route 
+                        path="/create_user" 
+                        element={
+                            <ProtectedRoute allowedRoles={['create_user']}>
+                                <RegistrationForm />
+                            </ProtectedRoute>
+                        }  */}
+                    
                 </Routes>
+
             </Router>
         </AuthProvider>
     );

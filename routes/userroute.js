@@ -1,24 +1,27 @@
-
 import express from 'express';
 const router = express.Router();
-import authmidlware from '../midlware/authmidlware.js';
-// Register route
+import authMiddleware from '../middleware/authMiddleware.js';
+import { register, check, login, logout, edit, users, deleteUser } from '../controllers/userController.js';
 
-import  {register,check,login} from '../controler/usercontroler.js';
-router.post('/register',register ) 
+// Register a new user
+router.post('/register', register);
 
+// Get all users (Admin access)
+// router.get('/users', authMiddleware, users);
 
+// Edit user details by ID
+router.put('/users/:id', authMiddleware, edit);
+
+// Delete user by ID
+router.delete('/users/:id', authMiddleware, deleteUser);
 
 // Login route
-router.post('/login',login ) 
-router.post('/logout',logout ) 
+router.post('/login', login);
 
-    // admin user
-// router.post('/add',add)
-//  manger route
-// router.post('/manager',manager)
-// Check user route
-router.get('/check', authmidlware,check)
+// Logout route
+router.post('/logout', logout);
 
+// Check user authentication
+router.get('/check', authMiddleware, check);
 
 export default router;

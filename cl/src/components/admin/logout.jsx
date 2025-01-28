@@ -1,6 +1,6 @@
 // src/components/Navbar.jsx (or wherever you handle logout)
 import React from 'react';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
