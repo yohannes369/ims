@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import UserList from '../components/admin/user_list';
 import Register from '../components/admin/add_user';
-import '../CSS/admin.css';
 import Logout from '../components/admin/logout';
 
 const AdminPage = () => {
@@ -22,11 +20,16 @@ const AdminPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 p-4">
-      <h1 className="text-4xl font-bold text-white mb-4 animate-bounce">Admin User Management</h1>
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-        <Register addUser={addUser} />
+    <div className="h-screen flex flex-col bg-gradient-to-br from-gray-100 to-gray-300">
+      <div className="flex justify-between items-center bg-white p-4 sticky top-0 shadow-md z-10">
         <Logout />
+        <h2 className="text-2xl font-bold text-gray-700">Admin Dashboard</h2>
+      </div>
+      <div className="flex-1 p-6">
+        <h2 className="text-xl font-semibold mb-6 text-gray-800">Welcome to Admin</h2>
+        <div className="bg-white p-6 rounded-lg shadow-lg">
+          <Register addUser={addUser} />
+        </div>
       </div>
     </div>
   );

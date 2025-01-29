@@ -8,10 +8,12 @@ import Home from './pages/Home';
 
 import ProtectedRoute from './routes/ProtectedRoute'; 
 import { AuthProvider } from './context/AuthContext'; 
+
 // import RegistrationForm from './admin/create_user'
 
 const App = () => {
     return (
+        <div>
         <AuthProvider>
             <Router>
                 <Routes>
@@ -46,7 +48,13 @@ const App = () => {
 
             </Router>
         </AuthProvider>
+     
+        </div>
     );
 };
 
 export default App;
+
+
+
+
