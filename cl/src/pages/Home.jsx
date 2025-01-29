@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../CSS/admin.css';
+// import '../CSS/admin.css';
 // import RegistrationForm from '../admin/create_user'; // Ensure this path is correct
 // import '../CSS/create_user.css'
 // import UserList from '../admin/display';

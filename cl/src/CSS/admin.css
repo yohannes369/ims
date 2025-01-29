@@ -1,53 +1,110 @@
-/* src/CSS/AdminPage.css */
+/* admin.css */
 
-.admin-dashboard {
-  text-align: center;
-  font-family: Arial, sans-serif;
-  width: 100%; /* Ensure full width */
-  margin: 0 auto; /* Center horizontally */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
 }
 
-.admin-header {
-  margin: 20px 0;
-  position: relative;
-  display: inline-block;
-  width: 100%; /* Make header full width */
+.admin-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
-.admin-options {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  width: 200px; /* Set a specific width for dropdown */
+h1, h2 {
+    text-align: center;
+    color: #333;
 }
 
-.admin-header:hover .admin-options {
-  display: block;
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-.admin-option-button {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  background-color: #f1f1f1;
-  border: none;
-  cursor: pointer;
-  width: 100%; /* Make buttons full width of dropdown */
+input, select, button {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
 }
 
-.admin-option-button:hover {
-  background-color: #ddd;
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-/* Optional: Add a container for full-width content */
-.admin-content {
-  width: 100%;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+button:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+button.edit, button.delete {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border-radius: 4px;
+}
+
+button.edit {
+    background-color: #28a745;
+    color: #fff;
+}
+
+button.edit:hover {
+    background-color: #218838;
+}
+
+button.delete {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+button.delete:hover {
+    background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+    .admin-page {
+        padding: 10px;
+    }
+
+    input, select, button {
+        max-width: 100%;
+    }
+
+    table {
+        font-size: 14px;
+    }
 }

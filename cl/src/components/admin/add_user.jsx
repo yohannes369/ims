@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './AddUser.css'
+// import './AddUser.css'
 const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -102,39 +102,56 @@ const Register = () => {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
-                
-                <select value={role} onChange={(e) => setRole(e.target.value)}>
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 p-4">
+            <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md space-y-4">
+                <h2 className="text-2xl font-bold text-center text-blue-500">{editing ? 'Update User' : 'Register User'}</h2>
+                <input 
+                    type="email" 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)} 
+                    placeholder="Email" 
+                    required 
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <input 
+                    type="password" 
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)} 
+                    placeholder="Password" 
+                    required 
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <select 
+                    value={role} 
+                    onChange={(e) => setRole(e.target.value)} 
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
                     <option value="manager">Manager</option>
                     <option value="admin">Admin</option>
                 </select>
-                
-                <button type="submit">{editing ? 'Update' : 'Register'}</button>
+                <button type="submit" className="w-full p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300 transform hover:scale-105">{editing ? 'Update' : 'Register'}</button>
+                {message && <p className="text-red-500 mt-2">{message}</p>}
             </form>
-            {message && <p>{message}</p>}
             
-            <h2>Registered Users:</h2>
-            <table>
+            <h2 className="text-2xl font-bold text-white mt-8">Registered Users:</h2>
+            <table className="w-full max-w-4xl bg-white rounded-lg shadow-lg mt-4">
                 <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Actions</th>
+                    <tr className="bg-blue-500 text-white">
+                        <th className="p-3">ID</th>
+                        <th className="p-3">Email</th>
+                        <th className="p-3">Role</th>
+                        <th className="p-3">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {users.map((user, index) => (
-                        <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{user.email}</td>
-                            <td>{user.role}</td>
-                            <td>
-                                <button onClick={() => handleEdit(user)}>Edit</button>
-                                <button onClick={() => handleDelete(user.id)}>Delete</button>
+                        <tr key={index} className="border-b border-gray-200">
+                            <td className="p-3">{index + 1}</td>
+                            <td className="p-3">{user.email}</td>
+                            <td className="p-3">{user.role}</td>
+                            <td className="p-3 space-x-2">
+                                <button onClick={() => handleEdit(user)} className="p-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition duration-300">Edit</button>
+                                <button onClick={() => handleDelete(user.id)} className="p-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-300">Delete</button>
                             </td>
                         </tr>
                     ))}
