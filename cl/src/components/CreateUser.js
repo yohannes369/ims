@@ -1,0 +1,49 @@
+-- import React, { useState } from "react";
+-- import axios from "axios";
+
+-- const CreateUser = () => {
+--   const [name, setName] = useState("");
+--   const [email, setEmail] = useState("");
+--   const [role, setRole] = useState("");
+
+--   const handleSubmit = async (e) => {
+--     e.preventDefault();
+--     try {
+--       const response = await axios.post("http://localhost:5000/create-user", {
+--         name,
+--         email,
+--         role,
+--       });
+--       alert(response.data); // "User created and emails sent"
+--     } catch (error) {
+--       console.error(error);
+--       alert("Error creating user");
+--     }
+--   };
+
+--   return (
+--     <form onSubmit={handleSubmit}>
+--       <input
+--         type="text"
+--         placeholder="Name"
+--         value={name}
+--         onChange={(e) => setName(e.target.value)}
+--       />
+--       <input
+--         type="email"
+--         placeholder="Email"
+--         value={email}
+--         onChange={(e) => setEmail(e.target.value)}
+--       />
+--       <input
+--         type="text"
+--         placeholder="Role"
+--         value={role}
+--         onChange={(e) => setRole(e.target.value)}
+--       />
+--       <button type="submit">Create User</button>
+--     </form>
+--   );
+-- };
+
+-- export default CreateUser;

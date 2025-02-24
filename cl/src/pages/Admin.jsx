@@ -8,7 +8,7 @@ const AdminPage = () => {
 
   const addUser = async (user) => {
     try {
-      const response = await axios.post('http://localhost:5200/register', user);
+      const response = await axios.post('http://localhost:5000/register', user);
       setUsers([...users, response.data]);
     } catch (error) {
       console.error('Error adding user:', error);
